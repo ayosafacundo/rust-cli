@@ -1,0 +1,11 @@
+[package]
+name = "rust-cli"
+version = "0.1.0"
+edition = "2021"
+readme = "./README.md" 
+manifest = "./manifest.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+random = "0.14.0"
