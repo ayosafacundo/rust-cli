@@ -1,7 +1,10 @@
-use std::io::{
-    stdin,
-    stdout,
-    Write
+use std::{
+    io::{
+        stdin, stdout, Read, Write
+    }, 
+    time::{
+        SystemTime, UNIX_EPOCH
+    }
 };
 
 pub fn input(prompt:&str) -> String {
@@ -16,6 +19,12 @@ pub fn input(prompt:&str) -> String {
         s.pop();
     }
     s
+}
+
+pub fn pause() {
+    let mut stdout = stdout();
+    stdout.flush().unwrap();
+    stdin().read(&mut [0]).unwrap();
 }
 
 pub fn find_string(strings: &[String], input: &str) -> Option<usize> {
@@ -41,6 +50,14 @@ pub fn select_from_options(options: &[String]) -> usize {
             }
         }
     }
+}
+
+pub fn get_time() -> u128 {
+    let since_the_epoch = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .expect("Time went backwards")
+        .as_millis();
+    since_the_epoch
 }
 
 pub enum Banners {
