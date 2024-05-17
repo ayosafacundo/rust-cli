@@ -56,19 +56,19 @@ pub fn start() {
     let types = [String::from("Begginer"), String::from("Easy"), String::from("Normal"), String::from("Hard"), String::from("Inferno"), String::from("Ranked"), String::from("Back")];
     welcome();
     pause();
+    let mut selected:usize;
     loop {
-
         print!("\x1B[2J");
         println!("Ok, let's begin by asking: How many rounds?");
         for Rounds { amount: _, name, enemy: _ } in ROUNDS {
             println!("- {}", name);
         }
         println!("- Back");
-        let selected:usize = select_from_options(&types);
+        selected = select_from_options(&types);
         if selected < ROUNDS.len() {
             game(&ROUNDS[selected]);
         } else {
-            crate::modules::games::main();
+            return;
         }
     }
 }
@@ -171,6 +171,7 @@ fn play(amount:u16,pc: fn(&Vec<RoundHistory>) -> bool) -> (u32, u32, Vec<RoundHi
         }
         history.push(chosen);
     }
+    pause();
     return (pc_points, player_points, history);
 }
 
